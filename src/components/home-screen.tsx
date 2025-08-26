@@ -300,7 +300,7 @@ export function HomeScreen() {
 
         {/* Footer */}
         <div className="text-center pt-8">
-          <p className="text-xs text-muted-foreground">Versão 1.0 • Feito com ❤️ por cubic</p>
+          <p className="text-xs text-muted-foreground">Versão 1.0 • Feito com ❤️ por  <a target="_blank" href="https://github.com/GuillermoMelean">Guillermo Melean</a></p>
         </div>
       </div>
     </div>
