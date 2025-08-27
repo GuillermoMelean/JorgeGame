@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Play, RotateCcw } from "lucide-react"
+import { HelpCircle, Play, RotateCcw, Settings } from "lucide-react"
 import { GameSetupScreen } from "@/components/game-setup-screen"
 import { GameRoundScreen } from "@/components/game-round-screen"
 import { VotingScreen } from "@/components/voting-screen"
@@ -277,11 +277,11 @@ export function HomeScreen() {
         </div>
 
         {/* Secondary Actions */}
-        {/* <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3">
           <Button
             variant="outline"
             className="h-12 rounded-xl bg-transparent"
-            onClick={() => { 
+            onClick={() => {
             }}
           >
             <HelpCircle className="mr-2 h-4 w-4" />
@@ -290,13 +290,13 @@ export function HomeScreen() {
           <Button
             variant="outline"
             className="h-12 rounded-xl bg-transparent"
-            onClick={() => { 
+            onClick={() => {
             }}
           >
             <Settings className="mr-2 h-4 w-4" />
             Definições
           </Button>
-        </div> */}
+        </div>
 
         {/* Footer */}
         <div className="text-center pt-8">

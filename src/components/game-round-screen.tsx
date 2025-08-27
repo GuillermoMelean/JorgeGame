@@ -23,9 +23,12 @@ export function GameRoundScreen({
   players,
   roundNumber,
   discussionSeconds,
+  turnSeconds,
   onBack,
   onStartVoting,
 }: GameRoundScreenProps) {
+
+  const [secondsLeft, setSecondsLeft] = useState(turnSeconds)
   const [gamePhase, setGamePhase] = useState<"speaking" | "discussion">("speaking")
   const [currentSpeakerIndex, setCurrentSpeakerIndex] = useState(0)
   const [isTimerRunning, setIsTimerRunning] = useState(false)
@@ -54,7 +57,21 @@ export function GameRoundScreen({
     }
   }
 
+  const handleStartTimer = () => {
+    setIsTimerRunning(true)
+  }
+
+  const handlePauseTimer = () => {
+    setIsTimerRunning(false)
+  }
+
   const handleNextPlayer = () => {
+
+    setSecondsLeft(0);
+    setTimeout(() => {
+      setSecondsLeft(turnSeconds);
+    }, 1000)
+
     if (currentSpeaker) {
       setSpokenPlayers((prev) => new Set([...prev, currentSpeaker.id]))
     }
@@ -64,7 +81,6 @@ export function GameRoundScreen({
       setIsTimerRunning(true)
     } else {
       setCurrentSpeakerIndex((prev) => prev + 1)
-      setIsTimerRunning(false)
     }
   }
 
@@ -110,7 +126,30 @@ export function GameRoundScreen({
           {/* Circular Timer */}
           <Card>
             <CardContent className="p-8 text-center space-y-6">
+              <CircularTimer
+                duration={secondsLeft}
+                isRunning={isTimerRunning}
+                onComplete={handleTimerComplete}
+                size={160}
+                className="mx-auto"
+              />
               <div className="flex space-x-3">
+                {!isTimerRunning ? (
+                  <Button size="lg" className="flex-1 rounded-xl" onClick={handleStartTimer}>
+                    <Play className="mr-2 h-4 w-4" />
+                    Começar Timer
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="flex-1 rounded-xl bg-transparent"
+                    onClick={handlePauseTimer}
+                  >
+                    <Pause className="mr-2 h-4 w-4" />
+                    Pausar
+                  </Button>
+                )}
                 <Button size="lg" className="flex-1 rounded-xl" onClick={handleNextPlayer}>
                   {isLastSpeaker ? "Iniciar Discussão" : "Próximo Jogador"}
                 </Button>
